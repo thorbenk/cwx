@@ -1,5 +1,4 @@
-
-#include "andres/cwx/latex.hxx"
+#include "cwx/latex.hxx"
 
 int main() {
     typedef unsigned int Label;

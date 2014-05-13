@@ -1,5 +1,5 @@
-#include "andres/cwx/cwx.hxx"
-#include "andres/cwx/sketch.hxx"
+#include "cwx/cwx.hxx"
+#include "cwx/sketch.hxx"
 
 int main() {
     typedef unsigned int Label;
