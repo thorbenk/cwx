@@ -124,9 +124,9 @@ ByteLabeledCellgrid<T, C>::asString() const
 {
     std::stringstream s;
     CellType c;
-    for(c[2] = 0; c[2] < 2 * shape(2) - 1; ++c[2]) {
-        for(c[1] = 0; c[1] < 2 * shape(1) - 1; ++c[1]) {
-            for(c[0] = 0; c[0] < 2 * shape(0) - 1; ++c[0]) {
+    for(c[2] = 0; c[2] < 2 * this->shape(2) - 1; ++c[2]) {
+        for(c[1] = 0; c[1] < 2 * this->shape(1) - 1; ++c[1]) {
+            for(c[0] = 0; c[0] < 2 * this->shape(0) - 1; ++c[0]) {
                 if(isMarked(c)) {
                     if(c.order() == 3) {
                         s << "*";

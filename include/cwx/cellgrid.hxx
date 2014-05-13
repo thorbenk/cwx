@@ -4,7 +4,7 @@
 
 #include <cassert>
 
-#include "stackvector.hxx"
+#include "stack-vector.hxx"
 #include "cwx/cell.hxx"
 
 namespace andres {

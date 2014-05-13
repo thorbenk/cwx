@@ -3,8 +3,8 @@
 #include <fstream>
 
 #include "andres/marray_hdf5.hxx"
-#include "andres/cwx/cwx.hxx"
-#include "andres/cwx/sketch.hxx"
+#include "cwx/cwx.hxx"
+#include "cwx/sketch.hxx"
 
 inline void test(const bool& pred) {
     if(!pred) throw std::runtime_error("Test failed.");

@@ -111,7 +111,7 @@ template<class T>
 // TODO: implement the following functions that throw an error 
 // if the dimension is not correct
 // template<class T>
-//     void load(const hid_t&, const std::string&, Vector<T>&);
+//     void load(const hid_t&, const std::string&, std::vector<T>&);
 // template<class T>
 //     void load(const hid_t&, const std::string&, Matrix<T>&);
 template<class T>
@@ -122,14 +122,14 @@ template<class T>
 // TODO: implement the following functions that throw an error 
 // if the dimension is not correct
 // template<class T>
-//     void load(const std::string&, const std::string&, Vector<T>&, HDF5Version = DEFAULT_HDF5_VERSION);
+//     void load(const std::string&, const std::string&, std::vector<T>&, HDF5Version = DEFAULT_HDF5_VERSION);
 // template<class T>
 //     void load(const std::string&, const std::string&, Matrix<T>&, HDF5Version = DEFAULT_HDF5_VERSION);
 template<class T>
     void load(const std::string&, const std::string&, std::vector<T>&, HDF5Version = DEFAULT_HDF5_VERSION);
 
 template<class T>
-    void loadShape(const hid_t&, const std::string&, Vector<T>&);
+    void loadShape(const hid_t&, const std::string&, std::vector<T>&);
 template<class T, class BaseIterator, class ShapeIterator>
     void loadHyperslab(const hid_t&, const std::string&,
         BaseIterator, BaseIterator, ShapeIterator, Marray<T>&);
@@ -238,7 +238,7 @@ void create(
     // build dataspace
     hid_t datatype = H5Tcopy(hdf5Type<T>());
     size_t dimension = std::distance(begin, end);
-    Vector<hsize_t> shape((size_t)(dimension));
+    std::vector<hsize_t> shape((size_t)(dimension));
     if(coordinateOrder == FirstMajorOrder) {
         // copy shape as is
         for(size_t j=0; j<dimension; ++j) {
@@ -326,7 +326,7 @@ void save(
 
     // build dataspace
     hid_t datatype = H5Tcopy(hdf5Type<T>());
-    Vector<hsize_t> shape(in.dimension());
+    std::vector<hsize_t> shape(in.dimension());
     if(in.coordinateOrder() == FirstMajorOrder) {
         // copy shape as is
         for(size_t j=0; j<in.dimension(); ++j) {
@@ -431,7 +431,7 @@ void save(
     const std::vector<T>& in
 )
 {
-    Vector<T> v(in.size());
+    std::vector<T> v(in.size());
     for(size_t j=0; j<in.size(); ++j) {
         v[j] = in[j];
     }
@@ -540,7 +540,7 @@ void load(
         throw std::runtime_error("Data types not equal error.");
     }
     int dimension = H5Sget_simple_extent_ndims(filespace);
-    Vector<hsize_t> shape(dimension);
+    std::vector<hsize_t> shape(dimension);
     herr_t status = H5Sget_simple_extent_dims(filespace, &shape[0], NULL);
     if(status < 0) {
         H5Dclose(dataset);
@@ -552,9 +552,9 @@ void load(
     hid_t memspace = H5Screate_simple(dimension, &shape[0], NULL);
 
     // resize marray
-    Vector<size_t> newShape((size_t)(dimension));
+    std::vector<size_t> newShape((size_t)(dimension));
     for(size_t j=0; j<newShape.size(); ++j) {
-        newShape(j) = (size_t)(shape[j]);
+        newShape[j] = (size_t)(shape[j]);
     }
     if(H5Aexists(dataset, reverseShapeAttributeName) > 0) {
         // reverse shape
@@ -594,7 +594,7 @@ template<class T>
 void loadShape(
    const hid_t& groupHandle,
    const std::string& datasetName,
-   Vector<T>& out
+   std::vector<T>& out
 ) {
     marray_detail::Assert(MARRAY_NO_ARG_TEST || groupHandle >= 0);
     HandleCheck<MARRAY_NO_DEBUG> handleCheck;
@@ -616,7 +616,7 @@ void loadShape(
     }
 
     // write shape to out
-    out = Vector<T>((size_t)(dimension));
+    out = std::vector<T>((size_t)(dimension));
     if(H5Aexists(dataset, reverseShapeAttributeName) > 0) {
         for(size_t j=0; j<out.size(); ++j) {
            out[out.size()-j-1] = T(shape[j]);
@@ -666,9 +666,9 @@ void loadHyperslab(
 
     // determine shape of hyperslab and array
     size_t size = std::distance(baseBegin, baseEnd);
-    Vector<hsize_t> offset(size);
-    Vector<hsize_t> slabShape(size);
-    Vector<hsize_t> marrayShape(size);
+    std::vector<hsize_t> offset(size);
+    std::vector<hsize_t> slabShape(size);
+    std::vector<hsize_t> marrayShape(size);
     CoordinateOrder coordinateOrder;
     if(H5Aexists(dataset, reverseShapeAttributeName) > 0) {
         // reverse base and shape
@@ -721,7 +721,7 @@ void loadHyperslab(
 
     // select memspace hyperslab
     hid_t memspace = H5Screate_simple(int(size), &marrayShape[0], NULL);
-    Vector<hsize_t> offsetOut(size, 0); // no offset
+    std::vector<hsize_t> offsetOut(size, 0); // no offset
     status = H5Sselect_hyperslab(memspace, H5S_SELECT_SET, &offsetOut[0],
         NULL, &marrayShape[0], NULL);
     if(status < 0) {
@@ -780,13 +780,13 @@ saveHyperslab(
     }
 
     // determine hyperslab shape
-    Vector<hsize_t> memoryShape(in.dimension());
+    std::vector<hsize_t> memoryShape(in.dimension());
     for(size_t j=0; j<in.dimension(); ++j) {
         memoryShape[j] = in.shape(j);
     }
     size_t size = std::distance(baseBegin, baseEnd);
-    Vector<hsize_t> offset(size);
-    Vector<hsize_t> slabShape(size);
+    std::vector<hsize_t> offset(size);
+    std::vector<hsize_t> slabShape(size);
     bool reverseShapeAttribute = 
         (H5Aexists(dataset, reverseShapeAttributeName) > 0);
     if(reverseShapeAttribute && in.coordinateOrder() == LastMajorOrder) {
@@ -832,7 +832,7 @@ saveHyperslab(
 
     // select memspace hyperslab
     hid_t memspace = H5Screate_simple(int(in.dimension()), &memoryShape[0], NULL);
-    Vector<hsize_t> memoryOffset(int(in.dimension()), 0); // no offset
+    std::vector<hsize_t> memoryOffset(int(in.dimension()), 0); // no offset
     status = H5Sselect_hyperslab(memspace, H5S_SELECT_SET, &memoryOffset[0], NULL,
         &memoryShape[0], NULL);
     if(status < 0) {

@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <iostream>
 
-#include "andres/cwx/cwcomplex.hxx"
+#include "cwx/cwcomplex.hxx"
 
 inline void test(const bool& pred) {
     if(!pred) throw std::runtime_error("Test failed.");
