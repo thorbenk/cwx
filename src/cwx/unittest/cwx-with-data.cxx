@@ -11,6 +11,8 @@ inline void test(const bool& pred) {
 }
 
 int main(int argc, char **argv) {
+    using namespace andres;
+    
     if(argc != 3) {
         std::cerr << "Parameters: <input-hdf5-file> <input-dataset>" << std::endl;
         return 1;
@@ -22,17 +24,22 @@ int main(int argc, char **argv) {
     typedef unsigned int Coordinate;
 
     // load volume labeling
-    andres::Marray<Label> volumeLabeling;
-    hid_t file = andres::hdf5::openFile(fileName);
-    andres::hdf5::load(file, datasetName, volumeLabeling);
-    andres::hdf5::closeFile(file);
+    Marray<Label> volumeLabeling;
+    hid_t file = hdf5::openFile(fileName);
+    hdf5::load(file, datasetName, volumeLabeling);
+    hdf5::closeFile(file);
 
     // build CWX data structure
-    andres::cwx::CWX<Label, Coordinate> cwx;
+    cwx::CWX<Label, Coordinate> cwx;
     cwx.build(volumeLabeling);
-
+    
     // TODO: add tests here
+    
+    hid_t outFile(hdf5::createFile("out.h5"));
+    hdf5::save(outFile, "cwx", cwx.grid());
+    hdf5::closeFile(outFile);
 
     return 0;
 }
+
 

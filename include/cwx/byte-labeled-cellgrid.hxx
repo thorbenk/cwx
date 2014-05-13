@@ -23,6 +23,7 @@ public:
     typedef typename CellgridType::CellType CellType;
     typedef typename CellgridType::CellVector CellVector;
     typedef typename CellType::Order Order;
+    typedef View<unsigned char> GridViewType;
 
     // construction and assignment
     ByteLabeledCellgrid();
@@ -37,6 +38,8 @@ public:
     void resize(const Coordinate, const Coordinate, const Coordinate);
     void mark(const CellType&, const bool);
     void anchor(const CellType&, const bool);
+    
+    const View<unsigned char> grid() const { return grid_; }
 
 private:
     unsigned char byte(const CellType&) const;
