@@ -72,6 +72,8 @@ public:
     template<class U> void labeledVoxelGrid(View<U>&) const; 
     template<class U> void labeledVoxelSlice(const Order, const Coordinate, Marray<U>&) const; // TODO: implement
     template<class U> void labeledVoxelSlice(const Order, const Coordinate, View<U>&) const; // TODO: implement
+    
+    const typename ByteLabeledCellgridType::GridViewType grid() const { return byteLabeledCellgrid_.grid(); }
 
 private:
     void connect(const CellType&, const Label&);
