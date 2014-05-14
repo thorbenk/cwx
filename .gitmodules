@@ -1,6 +1,6 @@
 [submodule "deps/marray"]
 	path = deps/marray
-	url = https://github.com/bjoern-andres/marray.git
+	url = https://github.com/thorbenk/marray.git
 [submodule "deps/stack-vector"]
 	path = deps/stack-vector
 	url = https://github.com/bjoern-andres/stack-vector.git
