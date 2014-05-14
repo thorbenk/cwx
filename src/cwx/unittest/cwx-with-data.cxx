@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
     // build CWX data structure
     cwx::CWX<Label, Coordinate> cwx;
-    cwx.build(volumeLabeling);
+    cwx.build(volumeLabeling, true);
     
     // TODO: add tests here
     

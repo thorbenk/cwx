@@ -44,7 +44,7 @@ public:
 
     // manipulation
     CWX(const bool = true);
-    template<class U, bool B> void build(const View<U, B>&);
+    template<class U, bool B> void build(const View<U, B>&, bool verbose=false);
 
     // query
     Coordinate shape(const Order) const;
@@ -602,11 +602,13 @@ template<class T, class C>
 template<class U, bool B>
 void
 CWX<T,C>::build(
-    const View<U, B>& volumeLabeling
+    const View<U, B>& volumeLabeling,
+    bool verbose
 )
 {
     // TODO: define anchors in every connected component in every slice
-
+    using std::cout; using std::endl; using std::flush;
+    
     if(volumeLabeling.dimension() != 3) {
         throw std::runtime_error("segmentation is not 3-dimensional.");
     }
@@ -616,9 +618,11 @@ CWX<T,C>::build(
         volumeLabeling.shape(2));
 
     // mark cells
+    if(verbose) cout << "mark cells" << flush;
     {
         CellVector cells;
         CellType cell;
+        if(verbose) cout << " 2-cells" << flush;
         // 2-cells
         if(byteLabeledCellgrid_.firstCell(2, cell)) {
             do {
@@ -631,6 +635,7 @@ CWX<T,C>::build(
             } while(byteLabeledCellgrid_.orderPreservingIncrement(cell));
         }
         // 1-cells
+        if(verbose) cout << " 1-cells" << flush;
         if(byteLabeledCellgrid_.firstCell(1, cell)) {
            do {
                 unsigned char marked = 0;
@@ -647,6 +652,7 @@ CWX<T,C>::build(
             } while(byteLabeledCellgrid_.orderPreservingIncrement(cell));
         }
         // 0-cells
+        if(verbose) cout << " 0-cells" << flush;
         if(byteLabeledCellgrid_.firstCell(0, cell)) {
            do {
                 byteLabeledCellgrid_.above(cell, cells);
@@ -678,7 +684,9 @@ CWX<T,C>::build(
     }
 
     // label connected components of 3-cells, 2-cells and 1-cells
+    if(verbose) cout << endl;
     for(Order order = 3; order > 0; --order) {
+        if(verbose) cout << "label connected components of " << (int)order << "-cells" << endl;
         Labeler labeler(*this, order);
         process(order, labeler);
     }
@@ -686,6 +694,7 @@ CWX<T,C>::build(
     if(redundantAnchors_) {
         Anchorer anchorer(*this);
         for(Order d=0; d<3; ++d) { // dimension orthogonal to the slice
+            if(verbose) cout << "redundant anchors normal " << (int)d << endl;
             for(Coordinate v=0; v<2*shape(d)-1; ++v) { // coordinate in that dimension
                 for(Order order = 2; order < 4; ++order) { // increasing order results in less anchors
                     process(order, d, v, anchorer);
@@ -695,6 +704,7 @@ CWX<T,C>::build(
     }
 
     // update cwcomplex_ for 0-cells
+    if(verbose) cout << "update cwcomplex_ for 0-cells" << endl;
     CellType cell;
     for(Label label = 1; label <= numberOfCells(0); ++label) {
         anchorage_.anchor(0, label, cell);
@@ -703,6 +713,7 @@ CWX<T,C>::build(
 
     // TODO: collect labels of connected components of *all orders* in *each* anchor
 
+    if(verbose) cout << "test invariant" << endl;
     testInvariant();
 }
 
