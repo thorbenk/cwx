@@ -13,6 +13,10 @@ add_definitions(-DHAVE_CPP11_INITIALIZER_LISTS)
 find_package(HDF5 COMPONENTS C HL REQUIRED)
 find_package(Valgrind)
 
+find_package(Vigra)
+include_directories(${VIGRA_INCLUDE_DIR})
+add_definitions(-DUSE_VIGRA_MULTIARRAY)
+
 include_directories(
     deps/marray/include/andres
     deps/stack-vector/include/andres

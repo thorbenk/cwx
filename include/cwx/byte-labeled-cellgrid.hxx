@@ -9,6 +9,10 @@
 #include "marray.hxx"
 #include "cwx/cellgrid.hxx"
 
+#ifdef USE_VIGRA_MULTIARRAY
+#include <vigra/multi_array.hxx>
+#endif
+
 namespace cwx {
 
 template<class T, class C>
@@ -22,8 +26,13 @@ public:
     typedef typename CellgridType::CellType CellType;
     typedef typename CellgridType::CellVector CellVector;
     typedef typename CellType::Order Order;
+#ifdef USE_VIGRA_MULTIARRAY
+    typedef vigra::MultiArray<3, unsigned char> GridType;
+    typedef vigra::MultiArrayView<3, unsigned char, vigra::UnstridedArrayTag> GridViewType;
+#else
     typedef andres::Marray<unsigned char> GridType;
     typedef andres::View<unsigned char> GridViewType;
+#endif
 
     // construction and assignment
     ByteLabeledCellgrid();
@@ -99,7 +108,11 @@ ByteLabeledCellgrid<T, C>::resize(
         size_t shape[] = {n0, n1, n2};
         grid_.resize(shape, shape + 3);
 #   else
+#ifdef USE_VIGRA_MULTIARRAY
+        grid_.reshape({n0, n1, n2});
+#else
         grid_.resize({n0, n1, n2});
+#endif
 #   endif
 }
 

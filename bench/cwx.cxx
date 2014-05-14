@@ -10,6 +10,10 @@
 
 #include <valgrind/callgrind.h>
 
+#ifdef USE_VIGRA_MULTIARRAY
+#include <vigra/hdf5impex.hxx>
+#endif
+
 #include "andres/marray_hdf5.hxx"
 #include "cwx/cwx.hxx"
 #include "cwx/sketch.hxx"
@@ -46,9 +50,16 @@ int main(int argc, char **argv) {
     
     // TODO: add tests here
     
+#ifndef USE_VIGRA_MULTIARRAY
     hid_t outFile(hdf5::createFile("out.h5"));
     hdf5::save(outFile, "cwx", cwx.grid());
     hdf5::closeFile(outFile);
+#else
+    using vigra::HDF5File;
+    HDF5File f("out.h5", HDF5File::Open);
+    f.write("cwx", cwx.grid());
+    f.close();
+#endif
 
     return 0;
 }
