@@ -10,7 +10,7 @@ inline void test(const bool& pred) {
 int main() {
     typedef unsigned int Label;
     typedef unsigned int Coordinate;
-    typedef andres::cwx::ByteLabeledCellgrid<Label, Coordinate> ByteLabeledCellgrid;
+    typedef cwx::ByteLabeledCellgrid<Label, Coordinate> ByteLabeledCellgrid;
     typedef ByteLabeledCellgrid::Order Order;
     typedef ByteLabeledCellgrid::CellType Cell;
     typedef ByteLabeledCellgrid::CellVector CellVector;

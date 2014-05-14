@@ -7,7 +7,6 @@
 #include "stack-vector.hxx"
 #include "cwx/cell.hxx"
 
-namespace andres {
 namespace cwx {
 
 /// geometry and topology of a 3-dimensional cell grid.
@@ -21,7 +20,7 @@ public:
     typedef C Coordinate;
     typedef Cell<Coordinate> CellType;
     typedef typename CellType::Order Order;
-    typedef StackVector<CellType, 6> CellVector;
+    typedef andres::StackVector<CellType, 6> CellVector;
 
     Cellgrid();
     Cellgrid(const Coordinate, const Coordinate, const Coordinate);
@@ -735,6 +734,5 @@ Cellgrid<T, C>::cell(
 }
 
 } // namespace cwx
-} // namespace andres
 
 #endif // #ifndef ANDRES_CWX_CELLGRID_HXX

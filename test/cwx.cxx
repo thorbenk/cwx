@@ -7,8 +7,8 @@ inline void test(const bool& pred) {
 int main() {
     typedef unsigned int Label;
     typedef unsigned int Coordinate;
-    typedef andres::cwx::Cell<Coordinate> Cell;
-    typedef andres::cwx::CWX<Label, Coordinate> CWX;
+    typedef cwx::Cell<Coordinate> Cell;
+    typedef cwx::CWX<Label, Coordinate> CWX;
 
     size_t size[] = {4, 4, 4};
     andres::Marray<Label> seg(size, size + 3);
@@ -78,7 +78,7 @@ int main() {
 
     // process
     {
-        andres::cwx::CellCollector<Coordinate> mesh;
+        cwx::CellCollector<Coordinate> mesh;
         cwx.process(0, 1, mesh);
         test(mesh.cells().size() == 1);
         test(mesh.cells()[0][0] == 3);
@@ -88,7 +88,7 @@ int main() {
     for(unsigned char order = 1; order < 4; ++order) {
         const size_t expectedSize = 1 << order;
         for(Label j = 1; j <= cwx.numberOfCells(order); ++j) {
-            andres::cwx::CellCollector<Coordinate> mesh;
+            cwx::CellCollector<Coordinate> mesh;
             cwx.process(order, j, mesh);
             test(mesh.cells().size() == expectedSize);
             for(size_t k=0; k<mesh.cells().size(); ++k) {

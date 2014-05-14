@@ -9,7 +9,7 @@ inline void test(const bool& pred) {
 
 int main() {
     typedef unsigned int Label;
-    typedef andres::cwx::CWComplex<Label> CWComplex;
+    typedef cwx::CWComplex<Label> CWComplex;
 
     {
         // construction of empty CW-complex

@@ -8,7 +8,7 @@ inline void test(const bool& pred) {
 
 int main() {
     typedef unsigned int Label;
-    typedef andres::cwx::Anchorage<Label, unsigned int> Anchorage;
+    typedef cwx::Anchorage<Label, unsigned int> Anchorage;
     typedef Anchorage::CellType CellType;
 
     Anchorage anchorage;

@@ -10,7 +10,6 @@
 #include <string>
 #include <sstream>
 
-namespace andres {
 namespace cwx {
 
 // up to order 3.
@@ -503,7 +502,6 @@ CWComplex<T>::testInvariant() const
 #endif
 }
 
-} // namespace andres
 } // namespace cwx
 
 #endif // #ifndef ANDRES_CWX_CWCOMPLEX_HXX

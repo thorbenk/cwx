@@ -8,7 +8,6 @@
 
 #include "cwx/cell.hxx"
 
-namespace andres {
 namespace cwx {
 
 template<class T, class C>
@@ -124,7 +123,6 @@ Anchorage<T, C>::push_back(
     return label;
 }
 
-} // namespace andres
 } // namespace cwx
 
 #endif // #ifndef ANDRES_CWX_ANCHORAGE_HXX

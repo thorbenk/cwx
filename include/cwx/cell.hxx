@@ -8,7 +8,6 @@
 #include <array>
 #include <cassert>
 
-namespace andres {
 namespace cwx {
 
 template<class C>
@@ -235,6 +234,5 @@ Cell<C>::corners(
 }
 
 } // namespace cwx
-} // namespace andres
 
 #endif // #ifndef ANDRES_CWX_CELL_HXX

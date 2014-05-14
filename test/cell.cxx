@@ -7,7 +7,7 @@ inline void test(const bool& pred) {
 }
 
 int main() {
-    typedef andres::cwx::Cell<int> Cell;
+    typedef cwx::Cell<int> Cell;
 
     // order
     {

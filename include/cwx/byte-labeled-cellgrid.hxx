@@ -9,7 +9,6 @@
 #include "marray.hxx"
 #include "cwx/cellgrid.hxx"
 
-namespace andres {
 namespace cwx {
 
 template<class T, class C>
@@ -23,7 +22,7 @@ public:
     typedef typename CellgridType::CellType CellType;
     typedef typename CellgridType::CellVector CellVector;
     typedef typename CellType::Order Order;
-    typedef View<unsigned char> GridViewType;
+    typedef andres::View<unsigned char> GridViewType;
 
     // construction and assignment
     ByteLabeledCellgrid();
@@ -39,13 +38,13 @@ public:
     void mark(const CellType&, const bool);
     void anchor(const CellType&, const bool);
     
-    const View<unsigned char> grid() const { return grid_; }
+    const andres::View<unsigned char> grid() const { return grid_; }
 
 private:
     unsigned char byte(const CellType&) const;
     Coordinate gc(const Coordinate) const;
 
-    Marray<unsigned char> grid_;
+    andres::Marray<unsigned char> grid_;
     static const unsigned char byte_[2][2][2];
 };
 
@@ -198,6 +197,5 @@ ByteLabeledCellgrid<T, C>::gc(
 }
 
 } // namespace cwx
-} // namespace andres
 
 #endif // #ifndef ANDRES_CWX_BYTE_LABELED_CELLGRID_HXX

@@ -3,9 +3,9 @@
 int main() {
     typedef unsigned int Label;
     typedef unsigned int Coordinate;
-    typedef andres::cwx::Cell<Coordinate> Cell;
-    typedef andres::cwx::CWX<Label, Coordinate> CWX;
-    typedef andres::cwx::CWComplexLatex<Label> CWComplexLatex;
+    typedef cwx::Cell<Coordinate> Cell;
+    typedef cwx::CWX<Label, Coordinate> CWX;
+    typedef cwx::CWComplexLatex<Label> CWComplexLatex;
 
     size_t size[] = {4, 4, 4};
     andres::Marray<Label> seg(size, size + 3);

@@ -11,7 +11,6 @@
 #include "cwx/cwcomplex.hxx"
 #include "cwx/cwx.hxx"
 
-namespace andres {
 namespace cwx {
 
 template<class T>
@@ -188,6 +187,5 @@ CWComplexLatex<T>::standardText()
 }
 
 } // namespace cwx
-} // namespace andres
 
 #endif // ANDRES_CWX_LATEX_HXX

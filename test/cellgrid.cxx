@@ -9,7 +9,7 @@ inline void test(const bool& pred) {
 
 typedef unsigned int Label;
 typedef unsigned int Coordinate;
-typedef andres::cwx::Cellgrid<Label, Coordinate> Cellgrid;
+typedef cwx::Cellgrid<Label, Coordinate> Cellgrid;
 typedef Cellgrid::Order Order;
 typedef Cellgrid::CellType Cell;
 typedef Cellgrid::CellVector CellVector;
@@ -375,7 +375,7 @@ void testTopology() {
     // sizeAbove, sizeBelow, above, below
     Coordinate shape[] = {3, 5, 4};
     Cellgrid cellgrid(shape[0], shape[1], shape[2]);
-    andres::cwx::Cell<Coordinate> cell;
+    cwx::Cell<Coordinate> cell;
     for(cell[2] = 0; cell[2] < 2 * shape[2] - 1; ++cell[2]) 
     for(cell[1] = 0; cell[1] < 2 * shape[1] - 1; ++cell[1])
     for(cell[0] = 0; cell[0] < 2 * shape[0] - 1; ++cell[0]) {
@@ -401,10 +401,10 @@ void testTopology() {
 void testGeometryCombinedWithTopology() {
     // labelOfCell, cellOfLabel
     Coordinate shape[] = {3, 5, 4};
-    andres::cwx::Cellgrid<Label, Coordinate> cellgrid(shape[0], shape[1], shape[2]);
+    cwx::Cellgrid<Label, Coordinate> cellgrid(shape[0], shape[1], shape[2]);
     for(unsigned char order = 0; order <= 3; ++order) {        
         std::vector<bool> seenLabels(cellgrid.numberOfCells(order), false);
-        andres::cwx::Cell<Coordinate> cell;
+        cwx::Cell<Coordinate> cell;
         for(cell[2] = 0; cell[2] < 2 * shape[2] - 1; ++cell[2]) 
         for(cell[1] = 0; cell[1] < 2 * shape[1] - 1; ++cell[1])
         for(cell[0] = 0; cell[0] < 2 * shape[0] - 1; ++cell[0]) {
@@ -414,7 +414,7 @@ void testGeometryCombinedWithTopology() {
                 const Label index = label - 1;
                 test(seenLabels[index] == 0);
                 seenLabels[index] = true;
-                andres::cwx::Cell<Coordinate> cellOfLabel;
+                cwx::Cell<Coordinate> cellOfLabel;
                 cellgrid.cell(order, label, cellOfLabel);
                 for(unsigned char j = 0; j < 3; ++j) {
                     test(cell[j] == cellOfLabel[j]);

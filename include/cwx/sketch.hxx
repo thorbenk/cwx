@@ -7,7 +7,6 @@
 
 #include "cwx/cell.hxx"
 
-namespace andres {
 namespace cwx {
 
 // this functor can be used with CWX::process
@@ -364,6 +363,5 @@ Sketch<C>::axes(
 }
 
 } // namespace cwx
-} // namespace andres
 
 #endif // ANDRES_CWX_SKETCH_HXX

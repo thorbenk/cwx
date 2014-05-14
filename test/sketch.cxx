@@ -4,8 +4,8 @@
 int main() {
     typedef unsigned int Label;
     typedef unsigned int Coordinate;
-    typedef andres::cwx::Cell<Coordinate> Cell;
-    typedef andres::cwx::CWX<Label, Coordinate> CWX;
+    typedef cwx::Cell<Coordinate> Cell;
+    typedef cwx::CWX<Label, Coordinate> CWX;
 
     size_t size[] = {4, 4, 4};
     andres::Marray<Label> seg(size, size + 3);
@@ -55,7 +55,7 @@ int main() {
     cwx.build(seg);
 
     // export sketch
-    andres::cwx::Sketch<Coordinate> sketch;
+    cwx::Sketch<Coordinate> sketch;
     for(unsigned char order = 0; order < 3; ++order) {
         for(Label label = 1; label <= cwx.numberOfCells(order); ++label) {
             cwx.process(order, label, sketch);

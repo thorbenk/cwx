@@ -12,7 +12,6 @@
 #include "cwx/cwcomplex.hxx"
 #include "cwx/anchorage.hxx"
 
-namespace andres {
 namespace cwx {
 
 // forward declarations
@@ -44,7 +43,7 @@ public:
 
     // manipulation
     CWX(const bool = true);
-    template<class U, bool B> void build(const View<U, B>&, bool verbose=false);
+    template<class U, bool B> void build(const andres::View<U, B>&, bool verbose=false);
 
     // query
     Coordinate shape(const Order) const;
@@ -63,15 +62,15 @@ public:
     template<class FUNCTOR> void process(const Order, FUNCTOR&) const;
     template<class FUNCTOR> void process(const Order, const Order, const Coordinate, FUNCTOR&) const;
 
-    template<class U> void labeledCellGrid(Marray<U>&) const; 
-    template<class U> void labeledCellGrid(View<U>&) const; 
-    template<class U> void labeledCellSlice(const Order, const Coordinate, Marray<U>&) const; // TODO: implement
-    template<class U> void labeledCellSlice(const Order, const Coordinate, View<U>&) const; // TODO: implement
+    template<class U> void labeledCellGrid(andres::Marray<U>&) const; 
+    template<class U> void labeledCellGrid(andres::View<U>&) const; 
+    template<class U> void labeledCellSlice(const Order, const Coordinate, andres::Marray<U>&) const; // TODO: implement
+    template<class U> void labeledCellSlice(const Order, const Coordinate, andres::View<U>&) const; // TODO: implement
 
-    template<class U> void labeledVoxelGrid(Marray<U>&) const; 
-    template<class U> void labeledVoxelGrid(View<U>&) const; 
-    template<class U> void labeledVoxelSlice(const Order, const Coordinate, Marray<U>&) const; // TODO: implement
-    template<class U> void labeledVoxelSlice(const Order, const Coordinate, View<U>&) const; // TODO: implement
+    template<class U> void labeledVoxelGrid(andres::Marray<U>&) const; 
+    template<class U> void labeledVoxelGrid(andres::View<U>&) const; 
+    template<class U> void labeledVoxelSlice(const Order, const Coordinate, andres::Marray<U>&) const; // TODO: implement
+    template<class U> void labeledVoxelSlice(const Order, const Coordinate, andres::View<U>&) const; // TODO: implement
     
     const typename ByteLabeledCellgridType::GridViewType grid() const { return byteLabeledCellgrid_.grid(); }
 
@@ -198,7 +197,7 @@ public:
     typedef CWX<T, C> CWXType;
     typedef typename CWXType::Order Order;
     typedef typename CWXType::CellType CellType;
-    typedef View<U> ViewType;
+    typedef andres::View<U> ViewType;
 
     ExportLabeler(const CWXType&, ViewType&);
     void setLabel(const ExportLabel);
@@ -220,7 +219,7 @@ public:
     typedef CWX<T, C> CWXType;
     typedef typename CWXType::Order Order;
     typedef typename CWXType::CellType CellType;
-    typedef View<U> ViewType;
+    typedef andres::View<U> ViewType;
 
     ExportVoxelLabeler(const CWXType&, ViewType&);
     void setLabel(const ExportLabel);
@@ -602,7 +601,7 @@ template<class T, class C>
 template<class U, bool B>
 void
 CWX<T,C>::build(
-    const View<U, B>& volumeLabeling,
+    const andres::View<U, B>& volumeLabeling,
     bool verbose
 )
 {
@@ -817,7 +816,7 @@ template<class T, class C>
 template<class U>
 inline void
 CWX<T,C>::labeledCellGrid(
-    Marray<U>& out
+    andres::Marray<U>& out
 ) const
 {
     const size_t arrayShape[] = {
@@ -826,14 +825,14 @@ CWX<T,C>::labeledCellGrid(
         2 * shape(2) - 1
     };
     out.resize(arrayShape, arrayShape + 3);
-    labeledCellGrid(static_cast<View<U>&>(out));
+    labeledCellGrid(static_cast<andres::View<U>&>(out));
 }
 
 template<class T, class C>
 template<class U>
 void
 CWX<T,C>::labeledCellGrid(
-    View<U>& out
+    andres::View<U>& out
 ) const
 {
     assert(out.dimension() == 3);
@@ -855,7 +854,7 @@ void
 CWX<T,C>::labeledCellSlice(
     const Order d,
     const Coordinate v,
-    Marray<U>& out
+    andres::Marray<U>& out
 ) const
 {
     // TODO: implement
@@ -867,7 +866,7 @@ void
 CWX<T,C>::labeledCellSlice(
     const Order d,
     const Coordinate v,
-    View<U>& out
+    andres::View<U>& out
 ) const
 {
     // TODO: implement
@@ -877,19 +876,19 @@ template<class T, class C>
 template<class U>
 inline void
 CWX<T,C>::labeledVoxelGrid(
-    Marray<U>& out
+    andres::Marray<U>& out
 ) const
 {
     const size_t arrayShape[] = {shape(0), shape(1), shape(2)};
     out.resize(arrayShape, arrayShape + 3);
-    labeledVoxelGrid(static_cast<View<U>&>(out));
+    labeledVoxelGrid(static_cast<andres::View<U>&>(out));
 }
 
 template<class T, class C>
 template<class U>
 void
 CWX<T,C>::labeledVoxelGrid(
-    View<U>& out
+    andres::View<U>& out
 ) const
 {
     assert(out.dimension() == 3);
@@ -1147,7 +1146,6 @@ ExportVoxelLabeler<T, C, U>::operator()(
 
 } // namespace detail
 
-} // namespace andres
 } // namespace cwx
 
 #endif // #ifndef ANDRES_CWX_HXX
