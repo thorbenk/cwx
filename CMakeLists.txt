@@ -19,5 +19,6 @@ include_directories(
     ${HDF5_INCLUDE_DIRS}
 )
 
-add_subdirectory(src)
+add_subdirectory(cmd)
+add_subdirectory(test)
 
