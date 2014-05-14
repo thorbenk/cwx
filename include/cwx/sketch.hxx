@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ANDRES_CWX_SKETCH_HXX
-#define ANDRES_CWX_SKETCH_HXX
+#ifndef CWX_SKETCH_HXX
+#define CWX_SKETCH_HXX
 
 #include <iostream>
 #include <algorithm> // std::sort
@@ -364,4 +364,4 @@ Sketch<C>::axes(
 
 } // namespace cwx
 
-#endif // ANDRES_CWX_SKETCH_HXX
+#endif // CWX_SKETCH_HXX

@@ -1,8 +1,8 @@
 // TODO: implement arithmetic operators and all comparison operators
 
 #pragma once
-#ifndef ANDRES_CWX_CELL_HXX
-#define ANDRES_CWX_CELL_HXX
+#ifndef CWX_CELL_HXX
+#define CWX_CELL_HXX
 
 #include <vector>
 #include <array>
@@ -235,4 +235,4 @@ Cell<C>::corners(
 
 } // namespace cwx
 
-#endif // #ifndef ANDRES_CWX_CELL_HXX
+#endif // #ifndef CWX_CELL_HXX

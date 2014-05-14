@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ANDRES_CWX_CWCOMPLEX_HXX
-#define ANDRES_CWX_CWCOMPLEX_HXX
+#ifndef CWX_CWCOMPLEX_HXX
+#define CWX_CWCOMPLEX_HXX
 
 #include <cassert>
 #include <vector>
@@ -504,4 +504,4 @@ CWComplex<T>::testInvariant() const
 
 } // namespace cwx
 
-#endif // #ifndef ANDRES_CWX_CWCOMPLEX_HXX
+#endif // #ifndef CWX_CWCOMPLEX_HXX

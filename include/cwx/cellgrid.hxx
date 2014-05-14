@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ANDRES_CWX_CELLGRID_HXX
-#define ANDRES_CWX_CELLGRID_HXX
+#ifndef CWX_CELLGRID_HXX
+#define CWX_CELLGRID_HXX
 
 #include <cassert>
 
@@ -735,4 +735,4 @@ Cellgrid<T, C>::cell(
 
 } // namespace cwx
 
-#endif // #ifndef ANDRES_CWX_CELLGRID_HXX
+#endif // #ifndef CWX_CELLGRID_HXX

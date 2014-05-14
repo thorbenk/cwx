@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ANDRES_CWX_HXX
-#define ANDRES_CWX_HXX
+#ifndef CWX_HXX
+#define CWX_HXX
 
 #include <stdexcept>
 #include <array>
@@ -1148,4 +1148,4 @@ ExportVoxelLabeler<T, C, U>::operator()(
 
 } // namespace cwx
 
-#endif // #ifndef ANDRES_CWX_HXX
+#endif // #ifndef CWX_HXX

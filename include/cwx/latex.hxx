@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ANDRES_CWX_LATEX_HXX
-#define ANDRES_CWX_LATEX_HXX
+#ifndef CWX_LATEX_HXX
+#define CWX_LATEX_HXX
 
 #include <vector>
 #include <array>
@@ -188,4 +188,4 @@ CWComplexLatex<T>::standardText()
 
 } // namespace cwx
 
-#endif // ANDRES_CWX_LATEX_HXX
+#endif // CWX_LATEX_HXX

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ANDRES_CWX_BYTE_LABELED_CELLGRID_HXX
-#define ANDRES_CWX_BYTE_LABELED_CELLGRID_HXX
+#ifndef CWX_BYTE_LABELED_CELLGRID_HXX
+#define CWX_BYTE_LABELED_CELLGRID_HXX
 
 #include <cassert>
 #include <string>
@@ -22,6 +22,7 @@ public:
     typedef typename CellgridType::CellType CellType;
     typedef typename CellgridType::CellVector CellVector;
     typedef typename CellType::Order Order;
+    typedef andres::Marray<unsigned char> GridType;
     typedef andres::View<unsigned char> GridViewType;
 
     // construction and assignment
@@ -38,13 +39,13 @@ public:
     void mark(const CellType&, const bool);
     void anchor(const CellType&, const bool);
     
-    const andres::View<unsigned char> grid() const { return grid_; }
+    const GridViewType grid() const { return grid_; }
 
 private:
     unsigned char byte(const CellType&) const;
     Coordinate gc(const Coordinate) const;
 
-    andres::Marray<unsigned char> grid_;
+    GridType grid_;
     static const unsigned char byte_[2][2][2];
 };
 
@@ -198,4 +199,4 @@ ByteLabeledCellgrid<T, C>::gc(
 
 } // namespace cwx
 
-#endif // #ifndef ANDRES_CWX_BYTE_LABELED_CELLGRID_HXX
+#endif // #ifndef CWX_BYTE_LABELED_CELLGRID_HXX
